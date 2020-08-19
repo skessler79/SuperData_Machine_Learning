@@ -1,5 +1,5 @@
 # =============================================================================
-# Kernel SVM
+# Decision Tree Classification
 # =============================================================================
 
 ### Importing the libraries
@@ -26,17 +26,17 @@ sc = StandardScaler()
 X_train = sc.fit_transform(X_train)
 X_test = sc.fit_transform(X_test)
 
-### Training the Kernel SVM on the Training Set
+### Training the Decision Tree model on the Training Set
 
-from sklearn.svm import SVC
-classifier = SVC(kernel = 'rbf', random_state = 0)
+from sklearn.tree import DecisionTreeClassifier
+classifier = DecisionTreeClassifier(criterion = 'entropy', random_state = 0)
 classifier.fit(X_train, y_train)
 
 ### Predicting a new result
 
 print(classifier.predict(sc.transform([[30, 87000]])))
 
-### Predicting the Test Set results
+### Predicting the result of the Test Set
 
 y_pred = classifier.predict(X_test)
 np.set_printoptions(precision = 0)
@@ -49,7 +49,7 @@ cm = confusion_matrix(y_test, y_pred)
 print(cm)
 print(accuracy_score(y_test, y_pred))
 
-### Visualising the Training set results
+### Visualising the training set data
 
 # Copy pasted code
 
@@ -63,7 +63,7 @@ plt.xlim(X1.min(), X1.max())
 plt.ylim(X2.min(), X2.max())
 for i, j in enumerate(np.unique(y_set)):
     plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
-plt.title('Kernel SVM (Training set)')
+plt.title('Decision Tree Classification (Training set)')
 plt.xlabel('Age')
 plt.ylabel('Estimated Salary')
 plt.legend()
@@ -80,11 +80,24 @@ plt.xlim(X1.min(), X1.max())
 plt.ylim(X2.min(), X2.max())
 for i, j in enumerate(np.unique(y_set)):
     plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1], c = ListedColormap(('red', 'green'))(i), label = j)
-plt.title('Kernel SVM (Training set)')
+plt.title('Decision Tree Classification (Training set)')
 plt.xlabel('Age')
 plt.ylabel('Estimated Salary')
 plt.legend()
 plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
